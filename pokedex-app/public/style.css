@@ -1,16 +1,25 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+@font-face {
+    font-family: 'PokemonFont';
+    src: url('fonts/PokemonSolid.ttf') format('truetype');
 }
 
+body {
+    font-family: 'PokemonFont', cursive;
+    text-align: center;
+    background-color: #E00000; 
+    color: black;
+}
+
+
 h1 {
-    background-color: lightgray;
+    background-color: #FFD700; 
     padding: 10px;
     border: 2px solid black;
     font-style: italic;
+    color: black;
 }
 
-/* Generaatioiden lista */
+
 .generations {
     display: flex;
     justify-content: center;
@@ -19,7 +28,7 @@ h1 {
 }
 
 .generation-box {
-    background-color: lightgray;
+    background-color: #15d4ff; 
     padding: 15px;
     border: 2px solid black;
     border-radius: 10px;
@@ -41,32 +50,30 @@ h1 {
     width: 100%;
 }
 
-/* Hover-efekti */
+
 .generation-box:hover {
-    background-color: #b4b4b4;
+    background-color: #A0A0A0; 
     cursor: pointer;
 }
 
 
-/* Pokemon-lista */
 .pokemon-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 saraketta */
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
     max-width: 800px;
     margin: 20px auto;
 }
 
 .pokemon-list div {
-    background-color: #f0f0f0;
+    background-color: #15d4ff;
     padding: 15px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 8px;
     font-weight: bold;
     text-align: center;
 }
 
-/* Linkkien tyyli */
 .pokemon-list a {
     text-decoration: none;
     color: black;
@@ -74,8 +81,7 @@ h1 {
     display: block;
 }
 
-/* Pokemonin yksityiskohtainen kortti */
-/* Pääkontaineri – sijoittaa laatikot rinnakkain */
+
 .pokemon-container {
     display: flex;
     justify-content: center;
@@ -84,38 +90,64 @@ h1 {
     margin-top: 20px;
 }
 
-/* Pokemonin iso laatikko (vain kuva) */
+
 .pokemon-card {
     background-color: white;
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid black;
+    border: 4px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 600px; /* Muokkaa tarpeen mukaan */
-    height: 600px; /* Muokkaa tarpeen mukaan */
+    width: 400px;
+    height: 400px;
 }
 
-/* Suurempi Pokémonin kuva */
 .pokemon-card img {
-    width: 100%;  /* Skaalaa kuvan täyttämään kortin */
-    height: auto; /* Säilyttää oikeat mittasuhteet */
-    max-width: 600px; /* Säädä maksikokoa tarvittaessa */
+    width: 100%;
+    height: auto;
+    max-width: 350px;
 }
 
-/* Infoboksit */
+
 .pokemon-info {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Yksittäiset laatikot (Tyypit & Stats) */
+
 .pokemon-types, .pokemon-stats {
-    background-color: #f0f0f0;
+    background-color: #8BAC0F; 
     padding: 10px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 5px;
     text-align: left;
 }
+
+
+.pokemon-types h3, .pokemon-stats h3 {
+    background-color: #8BAC0F; 
+    padding: 5px;
+    border-radius: 3px;
+    color: black;
+    text-align: center;
+    border: 2px solid black;
+}
+
+
+button {
+    background-color: #0073E6;
+    border: 2px solid black;
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0055A4;
+    cursor: pointer;
+}
+
+

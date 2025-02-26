@@ -4,23 +4,19 @@ import fetch from "node-fetch";
 const app = express();
 const port = 3000;
 
-// Asetetaan näkymämoottoriksi EJS
 app.set("view engine", "ejs");
 
-// Asetetaan "public"-kansio staattisille tiedostoille (CSS, kuvat)
 app.use(express.static("public"));
 
-// Funktio muuntaa numerot roomalaisiksi
+// Muuntaa numerot roomalaisiksi
 function romanize(num) {
     const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
-    return roman[num - 1] || num; // Palauttaa roomalaisen numeron tai alkuperäisen numeron
+    return roman[num - 1] || num;
 }
 
 // Etusivu, joka näyttää generaatioiden linkit
 app.get("/", (req, res) => {
-    const generations = Array.from({ length: 9 }, (_, i) => i + 1); // [1, 2, ..., 9]
-    
-    // Luodaan objekti, jossa sekä numerot että roomalaiset muodot
+    const generations = Array.from({ length: 9 }, (_, i) => i + 1);
     const generationData = generations.map(num => ({
         number: num,
         roman: romanize(num)
@@ -31,7 +27,7 @@ app.get("/", (req, res) => {
 
 // Generaatiokohtainen reitti
 app.get("/generation/:number", async (req, res) => {
-    const number = parseInt(req.params.number, 10); // Muunnetaan numeroiksi
+    const number = parseInt(req.params.number, 10);
     if (isNaN(number) || number < 1 || number > 9) {
         return res.status(400).send("Invalid generation number.");
     }
@@ -57,17 +53,19 @@ app.get("/generation/:number", async (req, res) => {
 app.get("/pokemon/:name", async (req, res) => {
     const { name } = req.params;
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}/`);
         if (!response.ok) return res.status(404).send("Pokemon not found!");
 
         const data = await response.json();
 
         const pokemon = {
             name: data.name,
-            weight: data.weight,
-            height: data.height,
+            sprite: data.sprites.front_default,
             types: data.types.map(t => t.type.name),
-            sprite: data.sprites.front_default
+            stats: data.stats.reduce((acc, stat) => {
+                acc[stat.stat.name] = stat.base_stat;
+                return acc;
+            }, {})
         };
 
         res.render("pokemon", { pokemon });
