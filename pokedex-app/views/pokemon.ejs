@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pokemon.name %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <!-- Pokedex Otsikko -->
+    <h1>Pokedex</h1>
+
+    <!-- Pääkontaineri -->
+    <div class="pokemon-container">
+        <!-- Pokemonin iso laatikko (vain kuva) -->
+        <div class="pokemon-card">
+            <img src="<%= pokemon.sprite %>" alt="<%= pokemon.name %>">
+        </div>
+
+        <!-- Infoboksit (tyypit & statsit) -->
+        <div class="pokemon-info">
+            <!-- Tyypit -->
+            <div class="pokemon-types">
+                <h3>Types</h3>
+                <ul>
+                    <% pokemon.types.forEach(type => { %>
+                        <li><%= type %></li>
+                    <% }); %>
+                </ul>
+            </div>
+
+            <!-- Statistiikat -->
+            <div class="pokemon-stats">
+                <h3>Stats</h3>
+                <ul>
+                    <li>Hp: <%= pokemon.stats?.hp || "N/A" %></li>
+                    <li>Attack: <%= pokemon.stats?.attack || "N/A" %></li>
+                    <li>Defense: <%= pokemon.stats?.defense || "N/A" %></li>
+                    <li>Special Attack: <%= pokemon.stats?.special_attack || "N/A" %></li>
+                    <li>Special Defense: <%= pokemon.stats?.special_defense || "N/A" %></li>
+                    <li>Speed: <%= pokemon.stats?.speed || "N/A" %></li>
+                </ul>            
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
