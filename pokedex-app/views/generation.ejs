@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generation <%= number %></title>
     <link rel="stylesheet" href="/style.css">
-    
-
+    <%- include('partials/header') %>
 </head>
 <body>
     <h1>Pokedex</h1>
@@ -24,5 +23,6 @@
     <% } %>
 
     <a href="/">Takaisin Pokedexiin</a>
+    <%- include('partials/footer') %>
 </body>
 </html>
