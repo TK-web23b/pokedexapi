@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generation <%= number %></title>
-    <link rel="stylesheet" href="/style.css">
-    <%- include('partials/header') %>
-</head>
+<%- include('partials/header', { otsikko: 'generaatio'}) %>
 <body>
     <h1>Pokedex</h1>
 
@@ -23,6 +15,5 @@
     <% } %>
 
     <a href="/">Takaisin Pokedexiin</a>
-    <%- include('partials/footer') %>
-</body>
-</html>
+<%- include('partials/footer') %>
+

@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex Generations</title>
-    <link rel="stylesheet" href="/style.css">
-    <%- include('partials/header') %>
-</head>
+<%- include('partials/header', { otsikko: 'Etusivu'}) %>
 <body>
-    <%- include('partials/header') %>
+    
 
     <h1>Pokedex</h1>
 
@@ -20,6 +12,5 @@
         <% }); %>
     </div>
 
-    <%- include('partials/footer') %>
-</body>
-</html>
+<%- include('partials/footer') %>
+
