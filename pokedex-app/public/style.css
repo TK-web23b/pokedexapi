@@ -10,6 +10,11 @@ body {
     color: black;
 }
 
+body.gengar-theme {
+    background-color: #4B0082; /* Indigo */
+    color: #EE82EE; /* Violet */
+}
+
 header {
     display: flex;
     align-items: center;
@@ -17,6 +22,10 @@ header {
     padding: 10px;
     background-color: #FFD700;
     border: 2px solid black;
+}
+
+body.gengar-theme header {
+    background-color: #800080; /* Purple */
 }
 
 header h1 {
@@ -173,6 +182,14 @@ button:hover {
     border: 2px solid black;
     border-radius: 5px;
     font-weight: bold;
+}
+
+body.gengar-theme .back-button {
+    background-color: #800080; /* Purple */
+}
+
+body.gengar-theme .back-button:hover {
+    background-color: #4B0082; /* Indigo */
 }
 
 .back-button:hover {

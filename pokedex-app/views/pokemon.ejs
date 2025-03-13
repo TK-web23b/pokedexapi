@@ -1,5 +1,5 @@
 <%- include('partials/header', { otsikko: 'Pokemonit'}) %>
-<body>
+<body class="<%= pokemon.name.toLowerCase() === 'gengar' ? 'gengar-theme' : '' %>">
     <div class="pokemon-container">
         <div class="pokemon-card">
             <img src="<%= pokemon.sprite %>" alt="<%= pokemon.name %>">

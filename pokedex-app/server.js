@@ -8,13 +8,15 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-// Muuntaa numerot roomalaisiksi
 function romanize(num) {
     const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
     return roman[num - 1] || num;
 }
 
-// Etusivu, joka näyttää generaatioiden linkit
+function capitalizeWords(string) {
+    return string.replace(/\b\w/g, char => char.toUpperCase());
+}
+
 app.get("/", (req, res) => {
     const generations = Array.from({ length: 9 }, (_, i) => i + 1);
     const generationData = generations.map(num => ({
@@ -25,7 +27,6 @@ app.get("/", (req, res) => {
     res.render("index", { generations: generationData });
 });
 
-// Generaatiokohtainen reitti
 app.get("/generation/:number", async (req, res) => {
     const number = parseInt(req.params.number, 10);
     if (isNaN(number) || number < 1 || number > 9) {
@@ -39,7 +40,7 @@ app.get("/generation/:number", async (req, res) => {
         const data = await response.json();
 
         const pokemonList = data.pokemon_species.map(pokemon => ({
-            name: pokemon.name,
+            name: capitalizeWords(pokemon.name),
             url: `/pokemon/${pokemon.name}`
         }));
 
@@ -49,7 +50,6 @@ app.get("/generation/:number", async (req, res) => {
     }
 });
 
-// Pokemonin yksittäinen reitti
 app.get("/pokemon/:name", async (req, res) => {
     const { name } = req.params;
     try {
@@ -59,9 +59,9 @@ app.get("/pokemon/:name", async (req, res) => {
         const data = await response.json();
 
         const pokemon = {
-            name: data.name,
+            name: capitalizeWords(data.name),
             sprite: data.sprites.front_default,
-            types: data.types.map(t => t.type.name),
+            types: data.types.map(t => capitalizeWords(t.type.name)),
             stats: data.stats.reduce((acc, stat) => {
                 acc[stat.stat.name] = stat.base_stat;
                 return acc;
@@ -74,7 +74,6 @@ app.get("/pokemon/:name", async (req, res) => {
     }
 });
 
-// Search route
 app.get("/search", async (req, res) => {
     const { name } = req.query;
     if (!name) {
@@ -90,9 +89,9 @@ app.get("/search", async (req, res) => {
         const data = await response.json();
 
         const pokemon = {
-            name: data.name,
+            name: capitalizeWords(data.name),
             sprite: data.sprites.front_default,
-            types: data.types.map(t => t.type.name),
+            types: data.types.map(t => capitalizeWords(t.type.name)),
             stats: data.stats.reduce((acc, stat) => {
                 acc[stat.stat.name] = stat.base_stat;
                 return acc;
@@ -105,7 +104,6 @@ app.get("/search", async (req, res) => {
     }
 });
 
-// Käynnistetään palvelin
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
