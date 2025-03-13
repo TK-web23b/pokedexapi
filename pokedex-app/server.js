@@ -74,6 +74,37 @@ app.get("/pokemon/:name", async (req, res) => {
     }
 });
 
+// Search route
+app.get("/search", async (req, res) => {
+    const { name } = req.query;
+    if (!name) {
+        return res.redirect("/");
+    }
+
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}/`);
+        if (!response.ok) {
+            return res.render("error", { message: "Pokemon not found!" });
+        }
+
+        const data = await response.json();
+
+        const pokemon = {
+            name: data.name,
+            sprite: data.sprites.front_default,
+            types: data.types.map(t => t.type.name),
+            stats: data.stats.reduce((acc, stat) => {
+                acc[stat.stat.name] = stat.base_stat;
+                return acc;
+            }, {})
+        };
+
+        res.render("pokemon", { pokemon });
+    } catch (error) {
+        res.status(500).send("Error fetching Pokemon data.");
+    }
+});
+
 // Käynnistetään palvelin
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

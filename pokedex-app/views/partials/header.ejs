@@ -6,3 +6,12 @@
     <title><%=otsikko%></title>
     <link rel="stylesheet" href="/style.css">
 </head>
+<body>
+    <header style="display: flex; align-items: center; justify-content: center;">
+        <h1 style="margin: 0;">Pokedex</h1>
+        <form action="/search" method="get" style="display: flex; align-items: center; margin-left: 10px;">
+            <input type="text" name="name" placeholder="Etsi Pokemon">
+            <button type="submit">Etsi</button>
+        </form>
+    </header>
+</body>

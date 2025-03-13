@@ -1,19 +1,10 @@
 <%- include('partials/header', { otsikko: 'Pokemonit'}) %>
 <body>
-
-    
-    <h1>Pokedex</h1>
-
-    
     <div class="pokemon-container">
-        
         <div class="pokemon-card">
             <img src="<%= pokemon.sprite %>" alt="<%= pokemon.name %>">
         </div>
-
-        
         <div class="pokemon-info">
-            
             <div class="pokemon-types">
                 <h3>Types</h3>
                 <ul>
@@ -22,8 +13,6 @@
                     <% }); %>
                 </ul>
             </div>
-
-            
             <div class="pokemon-stats">
                 <h3>Stats</h3>
                 <ul>
@@ -37,5 +26,7 @@
             </div>
         </div>
     </div>
+    <a href="/" class="back-button">Takaisin Pokedexin Etusivulle</a>
+    <a href="javascript:history.back()" class="back-button">Takaisin Pokemon valikkoon</a>
 <%- include('partials/footer') %>
 
